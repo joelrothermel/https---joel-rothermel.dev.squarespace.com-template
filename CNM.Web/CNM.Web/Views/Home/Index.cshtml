@@ -1,0 +1,15 @@
+﻿@model CNM.Web.ViewModels.Home.HomeIndexViewModel
+
+@{
+    Model.PageTitle = "Board Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Board Members</h2>
+
+<ul>
+@foreach (var member in Model.BoardMembers)
+{
+    <li>@member.FirstName</li>
+}
+</ul>

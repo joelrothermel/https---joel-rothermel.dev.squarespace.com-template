@@ -1,0 +1,38 @@
+/*                 BASE STYLES
+***********************************************/
+
+.clearfix:after {
+	height: 0;
+	clear: both;
+	content: ".";
+	display: block;
+	line-height: 0;
+	visibility: hidden;
+}
+.page {
+	width: 980px;
+	margin: 0 auto;
+}
+
+.check-three-col li {
+	width: 33%;
+	float: left;
+	margin-bottom: 5px;
+}
+.check-four-col li {
+	width: 25%;
+	float: left;
+	margin-bottom: 5px;
+}
+.check-five-col li {
+	width: 20%;
+	float: left;
+	margin-bottom: 5px;
+}
+.create-profile h2 {
+	font-size: 16px;
+	margin-top: 10px;
+}
+.create-profile h2.first {
+	margin-top: 0;
+}

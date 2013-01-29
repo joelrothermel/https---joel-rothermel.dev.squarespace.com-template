@@ -1,0 +1,49 @@
+/*               FORM STYLES
+***********************************************/
+
+label {
+	font-size: 12px;
+	line-height: 16px;
+}
+input[type="text"], input[type="password"] {
+	color: #777;
+	padding: 2px;
+	width: 250px;
+	font-size: 12px;
+	background: #fff;
+	line-height: 16px;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: #a6a6a2 #d3d3cf #d3d3cf #a6a6a2;
+	border-image: none;
+	border-style: solid solid solid solid;
+	border-width: 1px 1px 1px 1px;
+}
+input[type="submit"], button	{
+	padding: 5px 15px;
+}
+fieldset {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: solid 1px #ccc;
+}
+.fieldblock {
+	margin-bottom: 10px;
+}
+.fieldblock.last {
+	margin-bottom: 0;
+}
+.fieldblock input[type="text"] {
+	vertical-align: top;
+}
+.fieldblock label	{
+	float: left;
+	height: 23px;
+	width: 130px;
+	display: block;
+	line-height: 23px;
+	vertical-align: top;
+	display: inline-block;
+}

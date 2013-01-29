@@ -1,0 +1,49 @@
+/*         Login Styles
+***********************************/
+
+#login-wrap {
+	width: 420px;
+}
+.LoginForm {
+	visibility: hidden;
+}
+#login fieldset {
+	position: relative;
+	padding: 50px 20px 20px;
+}
+#login .fieldblock {
+    margin-bottom: 5px;
+}
+#login h2	{
+	top: 0;
+	left: 0;
+	color: #aaa;
+	width: 190px;
+	font-size: 18px;
+	cursor: pointer;
+	background: #ccc;
+	position: absolute;
+	padding: 10px 0 10px 20px;
+}
+#login h2.selected {
+	color: #111;
+	background: #fff;
+}
+#login .charity h2 {
+	margin-left: 208px;
+}
+
+.hidden {
+    display: none;
+}
+
+#login .spansize
+{
+    font-size:small;
+}
+
+#login .spanweight
+{
+    font-weight:bold;
+}
+

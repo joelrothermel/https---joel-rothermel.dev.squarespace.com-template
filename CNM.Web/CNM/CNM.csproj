@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4D802B22-5DEB-4EB2-AC5F-D1941AB9CDFA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CNM</RootNamespace>
+    <AssemblyName>CNM</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BoardMember\Repositories\BoardMemberProfileRepository.cs" />
+    <Compile Include="BoardMember\Services\BoardMemberProfileService.cs" />
+    <Compile Include="Charities\CharityCreator.cs" />
+    <Compile Include="Charities\CharityProvider.cs" />
+    <Compile Include="Charities\CharityResult.cs" />
+    <Compile Include="Charities\CharityUpdater.cs" />
+    <Compile Include="Charities\Repositories\CharityRepository.cs" />
+    <Compile Include="Charities\UpdateResult.cs" />
+    <Compile Include="Configuration\CnmEnvironment.cs" />
+    <Compile Include="Configuration\ConfigurationKey.cs" />
+    <Compile Include="Configuration\ConfigurationProvider.cs" />
+    <Compile Include="Configuration\ConnectionStringKey.cs" />
+    <Compile Include="Configuration\SearchIndexServiceAreaMappingAttribute.cs" />
+    <Compile Include="Configuration\SearchIndexSkillMappingAttribute.cs" />
+    <Compile Include="Encryptor.cs" />
+    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="FormsAuthFacade.cs" />
+    <Compile Include="GenericConverterExtensions.cs" />
+    <Compile Include="Geography\GeoProvider.cs" />
+    <Compile Include="Geography\Repositories\GeoRepository.cs" />
+    <Compile Include="LoggedInUser.cs" />
+    <Compile Include="Models\BoardMember.cs" />
+    <Compile Include="Models\BoardMemberSearchResult.cs" />
+    <Compile Include="Models\Charity.cs" />
+    <Compile Include="Models\CharitySearchResult.cs" />
+    <Compile Include="Models\OldSecurity.cs" />
+    <Compile Include="Models\SearchCriteria.cs" />
+    <Compile Include="Models\SearchResultBase.cs" />
+    <Compile Include="Models\SearchResults.cs" />
+    <Compile Include="Models\ServiceArea.cs" />
+    <Compile Include="Models\ServiceAreaEntity.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\SkillEntity.cs" />
+    <Compile Include="Models\Zip.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Searching\Procedures\SyncCharitySearch.cs" />
+    <Compile Include="Searching\Repositories\SearchingRepository.cs" />
+    <Compile Include="Searching\SearchingProvider.cs" />
+    <Compile Include="Searching\SearchResult.cs" />
+    <Compile Include="Searching\SearchResultScorer.cs" />
+    <Compile Include="Search\SearchRepository.cs" />
+    <Compile Include="Search\SearchService.cs" />
+    <Compile Include="Security\CustomDataTranslator.cs" />
+    <Compile Include="Security\CustomUserData.cs" />
+    <Compile Include="Security\Procedures\LookupCharityId.cs" />
+    <Compile Include="Security\Repositories\SecurityRepository.cs" />
+    <Compile Include="ServiceAreas\ServiceAreaRepository.cs" />
+    <Compile Include="Skills\SkillsRepository.cs" />
+    <Compile Include="Sql\ConnectionStrings.cs" />
+    <Compile Include="Sql\SqlDataContext.cs" />
+    <Compile Include="Sql\OutputParameter.cs" />
+    <Compile Include="Sql\SqlStoredProcedureBase.cs" />
+    <Compile Include="UserAuthenticationType.cs" />
+    <Compile Include="Web\CacheItem.cs" />
+    <Compile Include="Web\CachingProvider.cs" />
+    <Compile Include="Web\PersistenceMode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

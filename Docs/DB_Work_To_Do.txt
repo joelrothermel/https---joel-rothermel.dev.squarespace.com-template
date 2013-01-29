@@ -1,0 +1,8 @@
+Create a table to hold Prospective Board Members
+Create a table to hold Charities
+Create Procs for Creating/editing Prospective Board Member Profiles
+Create Procs for Creating/editing Charities
+Create a search proc for Charity Search
+Create a search proc for Prospective Board Member Search
+May need to provide scripts to the charity for migrating their existing charities into the new system
+May need to provide scripts to the charity for deleting Prospective board members/charities if we are not able to develop admin pages

@@ -1,0 +1,50 @@
+﻿@model CNM.Web.ViewModels.Account.LoginViewModel
+
+@{
+    Model.PageTitle = "Login";
+    Model.PageId = "login-wrap";
+}
+
+@section Header {
+}
+
+@section Footer {
+}
+
+<form id="login" class="LoginForm" action="/account/login" method="post">
+<fieldset>
+    <div class="login-form board">
+        <h2 data-type="board">Board Member Login</h2>
+        <div class="fieldblock">
+            @Html.LabelFor(x => x.BoardEmail)
+            @Html.TextBoxFor(x => x.BoardEmail)
+            @Html.ValidationMessageFor(x => x.BoardEmail)
+        </div>
+        <div class="fieldblock">
+            @Html.LabelFor(x => x.BoardPassword)
+            @Html.PasswordFor(x => x.BoardPassword)
+            @Html.ValidationMessageFor(x => x.BoardPassword)
+        </div>
+        <div class="fieldblock">
+            <span class="spansize"> Don't have an account?&nbsp;</span><span class="spansize spanweight">@Html.ActionLink("Sign up now", "New", "BoardMember")</span>
+        </div>
+    </div>
+    <div class="login-form charity">
+        <h2 data-type="charity">Nonprofit Login</h2>
+        <div class="fieldblock">
+            @Html.LabelFor(x => x.CharityUsername)
+            @Html.TextBoxFor(x => x.CharityUsername)
+            @Html.ValidationMessageFor(x => x.CharityUsername)
+        </div>
+        <div class="fieldblock">
+            @Html.LabelFor(x => x.CharityPassword)
+            @Html.PasswordFor(x => x.CharityPassword)
+            @Html.ValidationMessageFor(x => x.CharityPassword)
+        </div>
+    </div>
+    <div class="align-right">
+        <input type="submit" value="Login" />
+    </div>
+    @Html.HiddenFor(x => x.Type)
+</fieldset>
+</form>

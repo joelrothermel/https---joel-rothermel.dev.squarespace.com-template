@@ -1,0 +1,10 @@
+﻿@model CNM.Web.ViewModels.ViewModelBase
+
+<div id="nav" class="clearfix">
+    <ul>
+        <li><a href="/admin/index" title="Edit Profile">My Home</a></li>
+        @if (Model.IsLoggedIn) {
+        <li><a href="/account/logout" title="Sign Out">Sign Out</a></li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,151 @@
+﻿@using CNM.Web.ViewModels;
+@model BoardMemberProfileViewModel
+
+@{
+    Model.PageTitle =  "Create Profile";
+}
+
+@section Header {
+<div id="Create Profile">
+    <h2>Create profile</h2>
+</div>
+}
+@section Footer {}
+
+@section CSS {
+    @Styles.Render("/jqui")
+}
+
+<form method="post" action="">
+<fieldset class="haslegend two-col clearfix">
+    <legend>Login Information</legend>
+    <span class="legend">Login Information</span>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Email)
+        @Html.TextBoxFor(x => x.BoardMember.Email)
+        @Html.ValidationMessageFor(x => x.BoardMember.Email)
+    </div>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Password)
+        @Html.PasswordFor(x => x.BoardMember.Password)
+        @Html.ValidationMessageFor(x => x.BoardMember.Password)
+    </div>
+</fieldset>
+<fieldset class="haslegend two-col clearfix">
+    <legend>Contact Information</legend>
+    <span class="legend">Contact Information</span>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.FirstName, "First Name")
+        @Html.TextBoxFor(x => x.BoardMember.FirstName)
+        @Html.ValidationMessageFor(x => x.BoardMember.FirstName)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.LastName, "Last Name")
+        @Html.TextBoxFor(x => x.BoardMember.LastName)
+        @Html.ValidationMessageFor(x => x.BoardMember.LastName)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.Address1, "Address")
+        @Html.TextBoxFor(x => x.BoardMember.Address1)
+        @Html.ValidationMessageFor(x => x.BoardMember.Address1)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.Address2, "Address [Line 2]")
+        @Html.TextBoxFor(x => x.BoardMember.Address2)
+        @Html.ValidationMessageFor(x => x.BoardMember.Address2)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.City)
+        @Html.TextBoxFor(x => x.BoardMember.City)
+        @Html.ValidationMessageFor(x => x.BoardMember.City)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.State)
+        @Html.TextBoxFor(x => x.BoardMember.State)
+        @Html.ValidationMessageFor(x => x.BoardMember.State)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.PostalCode, "Postal Code")
+        @Html.TextBoxFor(x => x.BoardMember.PostalCode)
+        @Html.ValidationMessageFor(x => x.BoardMember.PostalCode)
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.BoardMember.Phone)
+        @Html.TextBoxFor(x => x.BoardMember.Phone)
+        @Html.ValidationMessageFor(x => x.BoardMember.Phone)
+    </div>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.BirthDay)
+        @Html.TextBoxFor(x => x.BoardMember.BirthDay, new { id = "datepicker", @Value = "" })
+        @Html.ValidationMessageFor(x => x.BoardMember.BirthDay)
+    </div>
+</fieldset>
+<fieldset class="haslegend two-col clearfix">
+    <legend>Gender and Ethnicity</legend>
+    <span class="legend">Gender and Ethnicity</span>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Gender)
+        @Html.TextBoxFor(x => x.BoardMember.Gender)
+        @Html.ValidationMessageFor(x => x.BoardMember.Gender)
+    </div>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Ethnicity)
+        @Html.TextBoxFor(x => x.BoardMember.Ethnicity)
+        @Html.ValidationMessageFor(x => x.BoardMember.Ethnicity)
+    </div>
+</fieldset>
+<fieldset class="haslegend two-col clearfix">
+    <legend>Employment Information</legend>
+    <span class="legend">Employment Information</span>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Employer)
+        @Html.TextBoxFor(x => x.BoardMember.Employer)
+        @Html.ValidationMessageFor(x => x.BoardMember.Employer)
+    </div>    
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.Title)
+        @Html.TextBoxFor(x => x.BoardMember.Title)
+        @Html.ValidationMessageFor(x => x.BoardMember.Title)
+    </div>
+</fieldset>
+<fieldset class="haslegend three-col clearfix">
+    <span class="legend">Available Skills</span>
+    <legend>Available Skills</legend>
+    <ul>
+        @for (int i = 0, j = Model.SelectedSkills.Count; i<j; i++) {
+            string name = CNM.EnumExtensions.GetDescription(Model.SelectedSkills[i]);
+            string value = ((int)Model.SelectedSkills[i]).ToString();
+            <li>
+                <input type="checkbox" name="selectedSkills" value="@value" />
+                @Html.Label(name)
+            </li>
+        }
+    </ul>
+</fieldset>
+<fieldset class="haslegend clearfix three-col">
+    <span class="legend">Selected Service Areas</span>
+    <legend>Selected Service Areas</legend>
+    <ul>
+        @for (int i = 0, j = Model.SelectedAreas.Count; i<j; i++) {
+            string name = CNM.EnumExtensions.GetDescription(Model.SelectedAreas[i]);
+            string value = ((int)Model.SelectedAreas[i]).ToString();
+            <li>
+                <input type="checkbox" name="selectedAreas" value="@value" />
+                @Html.Label(name)
+            </li>
+        }
+    </ul>
+</fieldset>
+<fieldset class="haslegend mission-statement">
+    <legend>Mission Statement</legend>
+    <span class="legend">Mission Statement</span>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.BoardMember.MissionStatement, "Enter your mission statement")
+        @Html.TextAreaFor(x => x.BoardMember.MissionStatement, new { cols = "110", rows = "10" })
+    </div>    
+    @Html.HiddenFor(x => x.BoardMember.BoardMemberId)
+</fieldset>
+<div class="align-center">
+    <input type="submit" value="submit" />
+</div>
+</form>

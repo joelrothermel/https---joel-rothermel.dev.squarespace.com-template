@@ -1,0 +1,195 @@
+﻿@model CNM.Web.ViewModels.Search.SearchFormViewModel
+
+@{
+    ViewBag.Title = "NonProfit Search";
+}
+
+
+@{var stateOptions = Model.States.Select(z=>new SelectListItem() { Selected = Model.State == z, Text = z, Value = z});}
+
+
+@section Header {
+<div id="header">
+    <h2>Find a Nonprofit</h2>
+</div>
+}
+
+<script id="result-template" type="text/x-handlebars-template">
+<div class="result">
+    <ul>
+        <li><span>Organization:</span> {{OrganizationName}}</li>
+        <li><span>Address:</span> {{Address1}}</li>
+        <li>{{Address2}}</li>
+        <li><span>City:</span> {{City}}</li>
+        <li><span>State:</span> {{State}}</li>
+        <li><span>Email:</span> {{Email}}</li>
+        <li><span>Website:</span> {{Website}}</li>
+    </ul>
+    <p class="view-desc">View Description</p>
+    <div class="description">
+        <span class="hide-desc">x</span>
+        <p><span>Description:</span> {{Essay}}</p>
+    </div>
+</div>
+</script>
+
+<form method="post" name="theForm" action="">
+<fieldset class="haslegend four-col clearfix">
+    <legend>Required Skills</legend>
+    <span class="legend">Needed Skills</span>
+    <ul>
+        @foreach (var skill in Model.Skills){
+            <li>
+                <input type="checkbox" name="SelectedSkills" value="@skill.ToString()"  />
+                @Html.Label(CNM.EnumExtensions.GetDescription(skill))
+            </li>
+        }
+    </ul>
+</fieldset>
+<fieldset class="haslegend four-col clearfix">
+    <legend>Needed Service Areas</legend>
+    <span class="legend">Required Service Areas</span>
+    <ul>
+        @foreach (var area in Model.ServiceAreas)
+        {
+            <li>
+                <input type="checkbox" name="SelectedServiceAreas" value="@area.ToString()" />
+                @Html.Label(CNM.EnumExtensions.GetDescription(area))
+            </li>
+        }
+    </ul>
+</fieldset>
+<fieldset class="haslegend clearfix two-col">
+    <legend>City, State and Postal Code</legend>
+    <span class="legend">City, State and Postal Code</span>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.City)
+        @Html.DropDownListFor(z => z.City, new SelectListItem[0])
+    </div>
+    <div class="fieldblock">
+        @Html.LabelFor(x => x.State)
+        @Html.DropDownListFor(z=>z.State, stateOptions)
+    </div>
+    <div class="fieldblock last">
+        @Html.LabelFor(x => x.PostalCode)
+        @Html.EditorFor(x => x.PostalCode)
+    </div>
+</fieldset>
+<div class="align-center">
+    <input type="submit" value="submit" />
+</div>
+</form>
+
+@Html.HiddenFor(x => x.PageNumber)
+
+<div id="search-results" class="clearfix">
+    <h2>Search Results</h2>
+</div>
+
+<script type="text/javascript">
+
+    function renderResults(data) {
+        var templateSource = $('#result-template').html();
+        var template = Handlebars.compile(templateSource);
+        var $search = $('#search-results').show().children('.result').remove().end();
+
+        $('#search-results .noResults').remove();
+        if (data.SearchResults.length == 0) {
+            $('#search-results').append('<span class="noResults">No Search Results</span>');
+        }
+
+        $(data.SearchResults).each(function () {
+            var html = template(this);
+            $search.append(html);
+        });
+
+        InitUi();
+    }
+
+    function renderError(data) {
+        alert('fail');
+    }
+
+    var InitUi = function () {
+        $('.view-desc').unbind().click(function () {
+            $(this).parents('.result').addClass('show-desc');
+        });
+
+        $('.hide-desc').unbind().click(function () {
+            $(this).parents('.result').removeClass('show-desc');
+        });
+    };
+
+    $(
+
+
+        function () {
+
+            $('#search-results').hide();
+
+            $('[type="submit"]').click(function (e) {
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                var formData = $('form').first().serialize();
+                $.ajax({
+                    url: "/search/nonprofits",
+                    type: "post",
+                    data: formData,
+                    success: function (response, notCopiedForTheNet, jqXHR) {
+
+                        var parsedObj = $.parseJSON(response);
+
+                        if (parsedObj != null) {
+                            renderResults(parsedObj);
+                        }
+                        else {
+                            renderResults(response);
+                        }
+                    },
+                    error: function (response, notCopiedForTheNet, jqXHR) {
+                    }
+                });
+
+
+            });
+
+            var geoProvider = new GeoProvider();
+            geoProvider.GetStates({
+                success: function (data) {
+                    $(data).each(function () {
+                        $('#State').append('<option value="' + this + '">' + this + '</option>');
+                    });
+                }
+            });
+
+            geoProvider.GetCities({
+                stateName: 'AA',
+                success: function (data) {
+                    $(data).each(function () {
+                        $('#City').append('<option value="' + this + '">' + this + '</option>');
+                    });
+                }
+            });
+
+            $('#State').change(function () {
+                var that = this;
+                $('#City').empty();
+                geoProvider.GetCities({
+                    stateName: $(that).val(),
+                    success: function (data) {
+                        $(data).each(function () {
+                            $('#City').append('<option value="' + this + '">' + this + '</option>');
+                        });
+                    }
+                });
+            });
+        }
+
+    );
+
+    
+
+    
+</script>

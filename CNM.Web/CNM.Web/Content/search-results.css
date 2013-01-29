@@ -1,0 +1,62 @@
+/*           SEARCH RESULTS STYLES
+***********************************************/
+
+#search-results .result {
+	width: 33%;
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+#search-results .result ul {
+	margin: 10px;
+	padding: 10px;
+	background: #ddd;
+}
+#search-results .result span {
+	font-weight: bold;
+}
+#search-results .view-desc {
+	right: 0;
+	bottom: 0;
+	color: #624b94;
+	background: #fff;
+	padding: 5px 10px;
+	position: absolute;
+	margin: 0 11px 11px 0;
+}
+#search-results .description {
+	top: 0;
+	left: 0;
+	z-index: 2;
+	color: #222;
+	right: 9000px;
+	padding: 0 10px;
+	background: #fff;
+	position: absolute;
+	margin: 156px 0 0 -9000px;
+}
+#search-results .show-desc {
+	overflow: visible;
+}
+#search-results .show-desc .description {
+	right: 0;
+	margin-left: 0;
+}
+#search-results .description p {
+	padding: 10px;
+}
+.hide-desc {
+	width: 16px;
+	float: right;
+	height: 10px;
+	display: none;
+	font-size: 12px;
+	background: #ccc;
+	line-height: 10px;
+	text-align: center;
+	padding: 1px 0 5px 0;
+	margin: 5px 0 0 0;
+}
+.show-desc .hide-desc {
+	display: block;
+}

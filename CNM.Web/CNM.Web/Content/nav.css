@@ -1,0 +1,26 @@
+/*                 NAV STYLES
+***********************************************/
+
+#nav {
+	margin-bottom: 20px;
+}
+#nav ul {
+	float: right;
+}
+#nav li {
+	float: left;
+	font-size: 13px;
+	margin-left: 2px;
+	line-height: 26px;
+}
+#nav a, #nav a:visited {
+	color: #111;
+	float: left;
+	height: 26px;
+	display: block;
+	padding: 4px 20px;
+	background: #ccc;
+}
+#nav a:hover {
+	background: #eee;
+}

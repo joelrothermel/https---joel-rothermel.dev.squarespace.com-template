@@ -1,0 +1,51 @@
+﻿@model CNM.Web.ViewModels.ViewModelBase
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.PageTitle</title>
+    @Styles.Render("~/styles")
+    @RenderSection("CSS", false)
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+
+<div id="@Model.PageId" class="@Model.PageClass">
+    @if (IsSectionDefined("Header")) {
+        @RenderSection("Header");
+    }
+    else {
+        <div id="header">
+        </div>
+    }
+    @if (IsSectionDefined("Nav")) {
+        @RenderSection("Nav");
+    }
+    @switch (Model.UserType){
+        case CNM.UserAuthenticationType.UberMegaSuperUltraUser:
+            Html.RenderPartial("_NavAdmin", Model);
+            break;
+        case CNM.UserAuthenticationType.Board:
+            Html.RenderPartial("_NavBoardMember", Model);
+            break;
+        case CNM.UserAuthenticationType.Charity:
+            Html.RenderPartial("_NavNonProfit", Model);
+            break;
+    }
+    <div id="@Model.ContentId" class="@Model.ContentClass">
+        @RenderBody()
+    </div>
+    @if (IsSectionDefined("Footer")) {
+        @RenderSection("Footer");
+    }
+    else {
+        <div id="footer">
+        </div>
+    }
+</div>
+
+@Scripts.Render("~/js")
+
+</body>
+</html>

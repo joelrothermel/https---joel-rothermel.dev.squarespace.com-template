@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Page</h2>
+
+<div id="choices">
+    <h3 id="boardMemberLookupHeader" class="selected">Board Member Lookup</h3>
+    <h3 id="createNewCharityHeader">Create New Charity</h3>
+
+    <div id="boardMemberLookup" class="panel">
+        <label>Board Member Email:</label>
+        <input type="text" placeholder="email" />
+        <button id="search">Search</button>
+
+        <div id="memberDisplay" style="display: none;">
+            <span id="email"></span>
+            <button id="disable" data-id="">disable</button>
+            <a id="editLink" href="">edit</a>
+        </div>
+    </div>
+
+    <div id="createNewCharity" class="panel" style="display: none;">
+        <p>Create new charity</p>
+
+        <label>Co id in old system:</label>
+        @Html.TextBox("usernameInOldSystem")
+
+        <label>Password:</label>
+        @Html.Password("password")
+
+        <button id="createCharitySubmit">create charity</button>
+
+        <p>Note that the co id, not the id of the charity, needs to be used for this. </p>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    function showBoardMember(data) {
+        if (data.id && data.id > 0) {
+
+            $('#memberDisplay').show();
+            $('#editLink').attr('href', '/boardmember/edit/' + data.id);
+            $('#disable').attr('data-id', data.id);
+
+            if (data.enabled) {
+                $('#disable').html('disable');
+            }
+            else {
+                $('#disable').html('enable');
+            }
+        }
+        else {
+            alert('Could not find a board member with that email.');
+        }
+    }
+
+    function toggleBoardMemberStatus() {
+        if ($('#disable').html() === 'enable') {
+            $('#disable').html('disable');
+        }
+        else {
+            $('#disable').html('enable');
+        }
+    }
+
+    function charityCreated() {
+        alert('charity created!');
+        $('#password').val('');
+        $('#usernameInOldSystem').val('');
+    }
+
+    $(document).ready(function () {
+
+        $('#search').click(function () {
+            
+            $.ajax({
+                url: '/admin/findboardmember/' + $('input').val(),
+                success: function (data) {
+                    showBoardMember(data);
+                },
+                error: function () {
+                    alert('Sorry, there was a problem.');
+                }
+            });
+
+        });
+
+        $('#disable').click(function () {
+
+            $.ajax({
+                url: '/admin/togglestatus/',
+                type: 'POST',
+                data: { id: $(this).data('id') },
+                success: function () {
+                    toggleBoardMemberStatus();
+                },
+                error: function () {
+                    alert('Sorry, there was a problem.');
+                }
+            });
+
+        });
+
+        $('#boardMemberLookupHeader').click(function () {
+            $('#boardMemberLookup').show();
+            $('#createNewCharity').hide();
+            $('#createNewCharityHeader').removeClass('selected');
+            $('#boardMemberLookupHeader').addClass('selected');
+        });
+
+        $('#createNewCharityHeader').click(function () {
+            $('#boardMemberLookup').hide();
+            $('#createNewCharity').show();
+            $('#createNewCharityHeader').addClass('selected');
+            $('#boardMemberLookupHeader').removeClass('selected');
+        });
+
+        $('#createCharitySubmit').click(function () {
+            $.ajax({
+                url: '/admin/createcharity',
+                type: 'POST',
+                data: {
+                    id: $('#usernameInOldSystem').val(),
+                    password: $('#password').val()
+                },
+                success: charityCreated,
+                error: function () {
+                    alert('Sorry, there was a problem.');
+                }
+            });
+        });
+    });
+</script>  
+
+<style type="text/css">
+    #choices
+    {
+        border: solid 1px #aaa;
+        max-width: 500px;
+    }
+
+    h3
+    {
+        top: 0;
+        left: 0;
+        color: #aaa;
+        float: left;
+        width: 40%;
+        font-size: 18px;
+        cursor: pointer;
+        background: #ccc;
+        padding: 10px 5% 10px 5%;
+    }
+
+    h3.selected
+    {
+	    color: #111;
+	    background: #fff;
+    }
+
+    .panel
+    {
+        clear: both;
+        padding: 15px;
+    }
+
+    label
+    {
+        display: block;
+        margin-top: 15px;
+    }
+
+    #createCharitySubmit
+    {
+        display: block;
+        margin-top: 15px;
+    }
+</style>

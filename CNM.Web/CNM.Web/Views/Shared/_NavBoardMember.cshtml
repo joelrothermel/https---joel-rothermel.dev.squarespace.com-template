@@ -1,0 +1,15 @@
+﻿@model CNM.Web.ViewModels.ViewModelBase
+
+<div id="nav" class="clearfix">
+    <ul>
+        @if (Context.Request.Url.PathAndQuery.ToLower().Contains("edit")){
+        <li><a href="/search/nonprofits" title="Search for Nonprofit">Search for Nonprofit</a></li>
+        }
+        else{
+        <li><a href="/boardmember/edit" title="Edit My Profile">Edit My Profile</a></li>
+        }
+        @if (Model.IsLoggedIn) {
+        <li><a href="/account/logout" title="Sign Out">Sign Out</a></li>
+        }
+    </ul>
+</div>

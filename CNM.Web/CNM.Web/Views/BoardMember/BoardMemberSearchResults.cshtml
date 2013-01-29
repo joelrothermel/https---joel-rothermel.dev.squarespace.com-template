@@ -1,0 +1,10 @@
+﻿@model CNM.Web.ViewModels.BoardMemberSearchResultsViewModel
+
+@{
+    ViewBag.Title = "BoardMemberSearchResults";
+}
+
+@foreach (var result in Model.MatchingCharities)
+{
+    <div>@result.OrganizationName</div>
+}
